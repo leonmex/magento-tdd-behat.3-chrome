@@ -1,0 +1,28 @@
+default:
+    extensions:
+        MageTest\MagentoExtension\Extension: ~
+        Behat\MinkExtension:
+            base_url: "http://ci.dyh.local/"
+            goutte: ~
+            default_session: selenium_chrome_session
+            sessions:
+              selenium_chrome_session:
+                selenium2:
+                  browser: "chrome"
+                  wd_host: "http://127.0.0.1:4444/wd/hub"
+                  capabilities:
+                    extra_capabilities:
+                      chromeOptions:
+                        args:
+                          - "--start-maximized"
+                          - "--test-type"
+                          - "--no-sandbox"
+    suites:
+        site:
+            paths:    [ %paths.base%/features/site ]
+            contexts:
+                - SiteContext
+        system:
+            paths:    [ %paths.base%/features/system ]
+            contexts:
+                - SystemContext

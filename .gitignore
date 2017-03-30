@@ -1,0 +1,6 @@
+.idea
+composer.lock
+dyh/
+NEW_behat.yml
+.modman/
+vendor/
