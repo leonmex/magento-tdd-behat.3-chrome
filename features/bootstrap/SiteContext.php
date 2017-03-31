@@ -20,6 +20,8 @@ require_once 'PHPUnit/Framework/Assert/Functions.php';
  */
 class SiteContext extends MagentoContext implements Context, SnippetAcceptingContext {
 
+    private $_webDriver = '';
+
     /**
      * @Given I am on a product :urlProduct page
      */
@@ -50,8 +52,19 @@ class SiteContext extends MagentoContext implements Context, SnippetAcceptingCon
      */
     public function theTestStartTheSeleniumShouldBeUp()
     {
-        throw new PendingException();
+        $this->setUp();
+        
     }
+
+    /**
+     * @var \RemoteWebDriver
+     */
+    public function setUp()
+    {
+        $capabilities = array(\WebDriverCapabilityType::BROWSER_NAME => 'chrome');
+        $this->_webDriver = RemoteWebDriver::create('http://127.0.0.1:4444/wd/hub', $capabilities);
+    }
+
 
     /**
      * @Then Selenium should show the page :titleOfThepage
